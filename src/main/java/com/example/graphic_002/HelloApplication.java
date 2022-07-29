@@ -605,6 +605,7 @@ public class HelloApplication extends Application {
                                         Button button00666 = new Button(l3);
                                         hBox002.getChildren().addAll(button00444, button00555, button00666);
                                         vBox001.getChildren().addAll(hBox001, hBox002);
+                                        //int a;
                                     }
                                 }
                                 vBox001.getChildren().addAll(button0000);
