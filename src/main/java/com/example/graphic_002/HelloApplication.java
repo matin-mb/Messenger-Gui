@@ -8,10 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -432,15 +429,39 @@ public class HelloApplication extends Application {
 
                             button0011.setOnAction(u-> {
                                 Button button0000 = new Button("ADD_POST");
+                                ScrollPane scrollPane001 = new ScrollPane();
 
 
                                 VBox vBox001 = new VBox(10);
                                 int t=0;
                                 vBox001.getChildren().removeAll(vBox001.getChildren());
-                                Scene scene0112 = new Scene(vBox001,700,700);
+                                scrollPane001.setContent(vBox001);
+
+                                Scene scene0112 = new Scene(scrollPane001,700,700);
+
                                 mainStage.setScene(scene0112);
                                 for (int i = Post.allPosts.size()-1; i >=0 ; i--) {
                                     if (Post.allPosts.get(i).user.equals(finalPersonalUser.username) || finalPersonalUser.followings.contains(Post.allPosts.get(i).user)) {
+                                        final String[] l1 = {new String()};
+                                        final String[] l2 = {new String()};
+                                        final String[] l3 = {new String()};
+                                        final int[] likes = {0};
+                                        final int[] dislikes = {0};
+                                        final int[] comments = {0};
+                                        if (comments[0] != 0)
+                                            l1[0] = String.valueOf(comments[0]) + " comments";
+                                        else
+                                            l1[0] = "No comment";
+
+                                        if (likes[0] != 0)
+                                            l2[0] = String.valueOf(likes[0]) + " likes";
+                                        else
+                                            l2[0] = "No like";
+
+                                        if (dislikes[0] != 0)
+                                            l3[0] = String.valueOf(dislikes[0]) + " dislikes";
+                                        else
+                                            l3[0] = "No dislike";
 
                                         HBox hBox001 = new HBox(20);
                                         HBox hBox002 = new HBox(20);
@@ -455,24 +476,7 @@ public class HelloApplication extends Application {
                                         label001.setFont(new Font("Arial",button00111.getFont().getSize()*2));
                                         hBox001.getChildren().addAll(label001, button00111, button00222, button00333);
                                         int finalI = i;
-                                        int likes = 0;
-                                        for (int j = 0; j < Post.allPosts.get(i).reactions.size(); j++) {
-                                            if (Post.allPosts.get(i).reactions.get(j).like == 1) {
-                                                likes++;
-                                            }
-                                        }
-                                        int dislikes = 0;
-                                        for (int j = 0; j < Post.allPosts.get(i).reactions.size(); j++) {
-                                            if (Post.allPosts.get(i).reactions.get(j).dislike == 1) {
-                                                dislikes++;
-                                            }
-                                        }
-                                        int comments = 0;
-                                        for (int j = 0; j < Post.allPosts.get(i).reactions.size(); j++) {
-                                            if (Post.allPosts.get(i).reactions.get(j).comment != null) {
-                                                comments++;
-                                            }
-                                        }
+
                                         button00111.setOnAction(y->{
                                             boolean b=true;
                                             for(int g=0;g<Post.allPosts.get(finalI).reactions.size() && b;g++)
@@ -482,6 +486,47 @@ public class HelloApplication extends Application {
                                                     Post.allPosts.get(finalI).reactions.get(g).like=1;
                                                     Post.allPosts.get(finalI).reactions.get(g).dislike=0;
                                                     b=false;
+                                                    hBox002.getChildren().removeAll(hBox002.getChildren());
+                                                    likes[0] =0;
+                                                    for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                        if (Post.allPosts.get(finalI).reactions.get(j).like == 1) {
+                                                            likes[0]++;
+                                                        }
+                                                    }
+                                                    dislikes[0] =0;
+                                                    for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                        if (Post.allPosts.get(finalI).reactions.get(j).dislike == 1) {
+                                                            dislikes[0]++;
+                                                        }
+                                                    }
+                                                    comments[0] =0;
+                                                    for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                        if (Post.allPosts.get(finalI).reactions.get(j).comment!=null) {
+                                                            comments[0]++;
+                                                        }
+                                                    }
+
+                                                    if (comments[0] != 0)
+                                                        l1[0] = String.valueOf(comments[0]) + " comments";
+                                                    else
+                                                        l1[0] = "No comment";
+
+                                                    if (likes[0] != 0)
+                                                        l2[0] = String.valueOf(likes[0]) + " likes";
+                                                    else
+                                                        l2[0] = "No like";
+
+                                                    if (dislikes[0] != 0)
+                                                        l3[0] = String.valueOf(dislikes[0]) + " dislikes";
+                                                    else
+                                                        l3[0] = "No dislike";
+                                                    Button button00444 = new Button(l1[0]);
+                                                    Button button00555 = new Button(l2[0]);
+                                                    Button button00666 = new Button(l3[0]);
+                                                    hBox002.getChildren().addAll(button00444, button00555, button00666);
+
+
+
                                                 }
                                             }
                                             if(b)
@@ -491,6 +536,46 @@ public class HelloApplication extends Application {
                                                reaction.like=1;
                                                reaction.dislike=0;
                                                Post.allPosts.get(finalI).reactions.add(reaction);
+                                                hBox002.getChildren().removeAll(hBox002.getChildren());
+                                                likes[0] =0;
+                                                for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                    if (Post.allPosts.get(finalI).reactions.get(j).like == 1) {
+                                                        likes[0]++;
+                                                    }
+                                                }
+                                                dislikes[0] =0;
+                                                for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                    if (Post.allPosts.get(finalI).reactions.get(j).dislike == 1) {
+                                                        dislikes[0]++;
+                                                    }
+                                                }
+                                                comments[0] =0;
+                                                for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                    if (Post.allPosts.get(finalI).reactions.get(j).comment!=null) {
+                                                        comments[0]++;
+                                                    }
+                                                }
+
+                                                if (comments[0] != 0)
+                                                    l1[0] = String.valueOf(comments[0]) + " comments";
+                                                else
+                                                    l1[0] = "No comment";
+
+                                                if (likes[0] != 0)
+                                                    l2[0] = String.valueOf(likes[0]) + " likes";
+                                                else
+                                                    l2[0] = "No like";
+
+                                                if (dislikes[0] != 0)
+                                                    l3[0] = String.valueOf(dislikes[0]) + " dislikes";
+                                                else
+                                                    l3[0] = "No dislike";
+                                                Button button00444 = new Button(l1[0]);
+                                                Button button00555 = new Button(l2[0]);
+                                                Button button00666 = new Button(l3[0]);
+                                                hBox002.getChildren().addAll(button00444, button00555, button00666);
+
+
                                             }
                                             mainStage.setScene(scene0112);
                                         });
@@ -502,6 +587,47 @@ public class HelloApplication extends Application {
                                                 {
                                                     Post.allPosts.get(finalI).reactions.get(g).like=0;
                                                     Post.allPosts.get(finalI).reactions.get(g).dislike=1;
+                                                    hBox002.getChildren().removeAll(hBox002.getChildren());
+                                                    likes[0] =0;
+                                                    for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                        if (Post.allPosts.get(finalI).reactions.get(j).like == 1) {
+                                                            likes[0]++;
+                                                        }
+                                                    }
+                                                    dislikes[0] =0;
+                                                    for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                        if (Post.allPosts.get(finalI).reactions.get(j).dislike == 1) {
+                                                            dislikes[0]++;
+                                                        }
+                                                    }
+                                                    comments[0] =0;
+                                                    for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                        if (Post.allPosts.get(finalI).reactions.get(j).comment!=null) {
+                                                            comments[0]++;
+                                                        }
+                                                    }
+
+                                                    if (comments[0] != 0)
+                                                        l1[0] = String.valueOf(comments[0]) + " comments";
+                                                    else
+                                                        l1[0] = "No comment";
+
+                                                    if (likes[0] != 0)
+                                                        l2[0] = String.valueOf(likes[0]) + " likes";
+                                                    else
+                                                        l2[0] = "No like";
+
+                                                    if (dislikes[0] != 0)
+                                                        l3[0] = String.valueOf(dislikes[0]) + " dislikes";
+                                                    else
+                                                        l3[0] = "No dislike";
+                                                    Button button00444 = new Button(l1[0]);
+                                                    Button button00555 = new Button(l2[0]);
+                                                    Button button00666 = new Button(l3[0]);
+                                                    hBox002.getChildren().addAll(button00444, button00555, button00666);
+
+
+
                                                     b=false;
                                                 }
                                             }
@@ -512,8 +638,50 @@ public class HelloApplication extends Application {
                                                 reaction.like=0;
                                                 reaction.dislike=1;
                                                 Post.allPosts.get(finalI).reactions.add(reaction);
+                                                hBox002.getChildren().removeAll(hBox002.getChildren());
+                                                likes[0] =0;
+                                                for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                    if (Post.allPosts.get(finalI).reactions.get(j).like == 1) {
+                                                        likes[0]++;
+                                                    }
+                                                }
+                                                dislikes[0] =0;
+                                                for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                    if (Post.allPosts.get(finalI).reactions.get(j).dislike == 1) {
+                                                        dislikes[0]++;
+                                                    }
+                                                }
+                                                comments[0] =0;
+                                                for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                    if (Post.allPosts.get(finalI).reactions.get(j).comment!=null) {
+                                                        comments[0]++;
+                                                    }
+                                                }
+
+                                                if (comments[0] != 0)
+                                                    l1[0] = String.valueOf(comments[0]) + " comments";
+                                                else
+                                                    l1[0] = "No comment";
+
+                                                if (likes[0] != 0)
+                                                    l2[0] = String.valueOf(likes[0]) + " likes";
+                                                else
+                                                    l2[0] = "No like";
+
+                                                if (dislikes[0] != 0)
+                                                    l3[0] = String.valueOf(dislikes[0]) + " dislikes";
+                                                else
+                                                    l3[0] = "No dislike";
+                                                Button button00444 = new Button(l1[0]);
+                                                Button button00555 = new Button(l2[0]);
+                                                Button button00666 = new Button(l3[0]);
+                                                hBox002.getChildren().addAll(button00444, button00555, button00666);
+
+
+
                                             }
                                         });
+                                        int finalI1 = i;
                                         button00333.setOnAction(y->{
                                             BorderPane borderPane0001 = new BorderPane();
                                             Label label0001 = new Label("ADD_Comment");
@@ -522,40 +690,121 @@ public class HelloApplication extends Application {
                                             borderPane0001.setBottom(textField0001);
                                             Button button0001 =new Button("Back");
                                             Button button0002 = new Button("Submit");
-                                            borderPane0001.setRight(button0001);
-                                            borderPane0001.setLeft(button0002);
+                                            borderPane0001.setRight(button0002);
+                                            borderPane0001.setLeft(button0001);
                                             Scene scene00123 = new Scene(borderPane0001,700,700);
                                             mainStage.setScene(scene00123);
 
                                             button0002.setOnAction(o-> {
-
                                                 boolean b = true;
                                                 for (int g = 0; g < Post.allPosts.get(finalI).reactions.size() && b; g++) {
                                                     if (Post.allPosts.get(finalI).reactions.get(g).user.equals(finalPersonalUser.username)) {
                                                         {
-                                                            if (Post.allPosts.get(finalI).reactions.get(g).comment != null) {
+                                                            if (Post.allPosts.get(finalI).reactions.get(g).comment == null) {
                                                                 Post.allPosts.get(finalI).reactions.get(g).comment = textField0001.getText();
                                                                 mainStage.setScene(scene0112);
+                                                                hBox002.getChildren().removeAll(hBox002.getChildren());
+                                                                likes[0] =0;
+                                                                for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                                    if (Post.allPosts.get(finalI).reactions.get(j).like == 1) {
+                                                                        likes[0]++;
+                                                                    }
+                                                                }
+                                                                dislikes[0] =0;
+                                                                for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                                    if (Post.allPosts.get(finalI).reactions.get(j).dislike == 1) {
+                                                                        dislikes[0]++;
+                                                                    }
+                                                                }
+                                                                comments[0] =0;
+                                                                for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                                    if (Post.allPosts.get(finalI).reactions.get(j).comment!=null) {
+                                                                        comments[0]++;
+                                                                    }
+                                                                }
+
+                                                                if (comments[0] != 0)
+                                                                    l1[0] = String.valueOf(comments[0]) + " comments";
+                                                                else
+                                                                    l1[0] = "No comment";
+
+                                                                if (likes[0] != 0)
+                                                                    l2[0] = String.valueOf(likes[0]) + " likes";
+                                                                else
+                                                                    l2[0] = "No like";
+
+                                                                if (dislikes[0] != 0)
+                                                                    l3[0] = String.valueOf(dislikes[0]) + " dislikes";
+                                                                else
+                                                                    l3[0] = "No dislike";
+                                                                Button button00444 = new Button(l1[0]);
+                                                                Button button00555 = new Button(l2[0]);
+                                                                Button button00666 = new Button(l3[0]);
+                                                                hBox002.getChildren().addAll(button00444, button00555, button00666);
+
+
+
                                                             }
                                                             else {
                                                                 Text text = new Text("You have made comment to this post!");
                                                                 borderPane0001.setTop(text);
+                                                                System.out.println(3);
                                                             }
-
-
                                                             b = false;
-
                                                         }
                                                     }
+                                                }
                                                     if (b) {
                                                         Reaction reaction = new Reaction();
                                                         reaction.user = finalPersonalUser.username;
                                                         reaction.comment = textField0001.getText();
-
                                                         Post.allPosts.get(finalI).reactions.add(reaction);
+                                                        hBox002.getChildren().removeAll(hBox002.getChildren());
+                                                        likes[0] =0;
+                                                        for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                            if (Post.allPosts.get(finalI).reactions.get(j).like == 1) {
+                                                                likes[0]++;
+                                                            }
+                                                        }
+                                                        dislikes[0] =0;
+                                                        for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                            if (Post.allPosts.get(finalI).reactions.get(j).dislike == 1) {
+                                                                dislikes[0]++;
+                                                            }
+                                                        }
+                                                        comments[0] =0;
+                                                        for (int j = 0; j < Post.allPosts.get(finalI).reactions.size(); j++) {
+                                                            if (Post.allPosts.get(finalI).reactions.get(j).comment!=null) {
+                                                                comments[0]++;
+                                                            }
+                                                        }
+
+                                                        if (comments[0] != 0)
+                                                            l1[0] = String.valueOf(comments[0]) + " comments";
+                                                        else
+                                                            l1[0] = "No comment";
+
+                                                        if (likes[0] != 0)
+                                                            l2[0] = String.valueOf(likes[0]) + " likes";
+                                                        else
+                                                            l2[0] = "No like";
+
+                                                        if (dislikes[0] != 0)
+                                                            l3[0] = String.valueOf(dislikes[0]) + " dislikes";
+                                                        else
+                                                            l3[0] = "No dislike";
+                                                        Button button00444 = new Button(l1[0]);
+                                                        Button button00555 = new Button(l2[0]);
+                                                        Button button00666 = new Button(l3[0]);
+                                                        hBox002.getChildren().addAll(button00444, button00555, button00666);
+
+
+
+
+
                                                         mainStage.setScene(scene0112);
                                                     }
-                                                }
+
                                             });
                                             button0001.setOnAction(s->{
                                                 mainStage.setScene(scene0112);
@@ -564,47 +813,45 @@ public class HelloApplication extends Application {
 
 
                                         });
-                                         likes = 0;
+                                         likes[0] =0;
                                         for (int j = 0; j < Post.allPosts.get(i).reactions.size(); j++) {
                                             if (Post.allPosts.get(i).reactions.get(j).like == 1) {
-                                                likes++;
+                                                likes[0]++;
                                             }
                                         }
-                                         dislikes = 0;
+                                        dislikes[0] =0;
                                         for (int j = 0; j < Post.allPosts.get(i).reactions.size(); j++) {
                                             if (Post.allPosts.get(i).reactions.get(j).dislike == 1) {
-                                                dislikes++;
+                                                dislikes[0]++;
                                             }
                                         }
-                                         comments = 0;
+                                        comments[0] =0;
                                         for (int j = 0; j < Post.allPosts.get(i).reactions.size(); j++) {
-                                            if (Post.allPosts.get(i).reactions.get(j).comment != null) {
-                                                comments++;
+                                            if (!Post.allPosts.get(i).reactions.get(j).comment.isEmpty()) {
+                                                comments[0]++;
                                             }
                                         }
-                                        String l1 = new String();
-                                        String l2 = new String();
-                                        String l3 = new String();
-                                        if (comments != 0)
-                                            l1 = String.valueOf(comments) + " comments";
-                                        else
-                                            l1 = "No comment";
 
-                                        if (likes != 0)
-                                            l2 = String.valueOf(likes) + " likes";
+                                        if (comments[0] != 0)
+                                            l1[0] = String.valueOf(comments[0]) + " comments";
                                         else
-                                            l2 = "No like";
+                                            l1[0] = "No comment";
 
-                                        if (dislikes != 0)
-                                            l3 = String.valueOf(dislikes) + " dislikes";
+                                        if (likes[0] != 0)
+                                            l2[0] = String.valueOf(likes[0]) + " likes";
                                         else
-                                            l3 = "No dislike";
-                                        hBox002.getChildren().removeAll(hBox002.getChildren());
-                                        Button button00444 = new Button(l1);
-                                        Button button00555 = new Button(l2);
-                                        Button button00666 = new Button(l3);
+                                            l2[0] = "No like";
+
+                                        if (dislikes[0] != 0)
+                                            l3[0] = String.valueOf(dislikes[0]) + " dislikes";
+                                        else
+                                            l3[0] = "No dislike";
+                                        Button button00444 = new Button(l1[0]);
+                                        Button button00555 = new Button(l2[0]);
+                                        Button button00666 = new Button(l3[0]);
                                         hBox002.getChildren().addAll(button00444, button00555, button00666);
                                         vBox001.getChildren().addAll(hBox001, hBox002);
+
                                         //int a;
                                     }
                                 }
