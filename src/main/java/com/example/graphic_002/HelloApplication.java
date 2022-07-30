@@ -700,16 +700,23 @@ public class HelloApplication extends Application {
                                 vBox001.getChildren().addAll(button00777);
 
                                 button0000.setOnAction(k->{
-                                    BorderPane borderPane0000 = new BorderPane();
+                                    AnchorPane anchorPane0000 = new AnchorPane();
                                     Label label00001 = new Label("Please text your post");
-                                    borderPane0000.setCenter(label00001);
+                                    anchorPane0000.getChildren().addAll(label00001);
+                                    label00001.setLayoutX(mainStage.getWidth()/2 -label00001.getWidth()/2);
+                                    label00001.setLayoutY(mainStage.getHeight()/2 -label00001.getHeight()/2);
+
                                     TextField textField0000 = new TextField();
-                                    borderPane0000.setBottom(textField0000);
+                                    textField0000.setLayoutY((mainStage.getHeight()*3)/4 );
                                     Button button00001 = new Button("Submit");
-                                    borderPane0000.setRight(button00001);
+                                    anchorPane0000.getChildren().addAll(button00001);
+                                    button00001.setLayoutX(600);
+                                    button00001.setLayoutY(350);
                                     Button button00002 = new Button("Back");
-                                    borderPane0000.setLeft(button00002);
-                                    Scene scene0000 = new Scene(borderPane0000,700,700);
+                                    anchorPane0000.getChildren().addAll(button00002);
+                                    button00002.setLayoutX(600);
+                                    button00002.setLayoutY(400);
+                                    Scene scene0000 = new Scene(anchorPane0000,700,700);
                                     button00001.setOnAction(s->{
                                         Post post = new Post();
                                         post.user= finalPersonalUser.username;
