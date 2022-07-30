@@ -3,12 +3,12 @@ package Sample;
 import java.util.ArrayList;
 
 public class Chats {
-    int ID;
-    String sender;
-    String receiver;
-    StringBuilder text;
-    int replied;
-    int forwarded;
+    public int ID;
+    public String sender;
+    public String receiver;
+    public StringBuilder text;
+    public int replied;
+    public int forwarded;
     public static ArrayList<Chats> allChats = new ArrayList<Chats>();
 
 
