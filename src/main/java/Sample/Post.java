@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Post {
     public String text ;
     public String user;
+    public String photoAddress;
 
     public ArrayList<Reaction> reactions = new  ArrayList<Reaction>();
     public static ArrayList<Post> allPosts = new ArrayList<Post>();
