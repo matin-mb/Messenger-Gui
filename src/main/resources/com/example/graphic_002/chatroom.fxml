@@ -5,11 +5,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="349.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.graphic_002.Chatroom">
     <children>
-        <Button fx:id="bntUser1Send" layoutX="493.0" layoutY="302.0" onAction="#handleUser1SubmitMessage" text="send" />
-        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+        <Button fx:id="bntUser1Send" layoutX="493.0" layoutY="315.0" onAction="#handleUser1SubmitMessage" text="send" />
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="62.0" prefHeight="17.0" prefWidth="62.0" />
 <!--        <Button fx:id="btnUser2Send" layoutX="351.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleUser2SubmitMessage" text="send message user2" />-->
-        <ListView fx:id="lvChatWindow" layoutX="220.0" layoutY="14.0" prefHeight="273.0" prefWidth="315.0" />
-        <TextField fx:id="tfUser1" layoutX="221.0" layoutY="302.0" prefHeight="25.0" prefWidth="269.0" />
+        <ListView fx:id="lvChatWindow" layoutX="220.0" layoutY="41.0" prefHeight="268.0" prefWidth="315.0" />
+        <TextField fx:id="tfUser1" layoutX="220.0" layoutY="315.0" prefHeight="25.0" prefWidth="269.0" />
+      <ComboBox fx:id="chatsAvailable" layoutX="14.0" layoutY="43.0" prefHeight="25.0" prefWidth="139.0" promptText="chatrooms:" />
+      <Button fx:id="chatSelected" layoutX="161.0" layoutY="43.0" mnemonicParsing="false" text="select" />
+      <Button fx:id="backButton" layoutY="2.0" mnemonicParsing="false" text="Back" />
 <!--        <TextField fx:id="tfUser2" layoutX="293.0" layoutY="258.0" prefHeight="25.0" prefWidth="239.0" />-->
     </children>
 </AnchorPane>

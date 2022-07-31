@@ -21,45 +21,6 @@ public class User {
     public User() {
     }
 
-//    public void follow(){
-//
-//        System.out.println("Here you can follow new people! (0: Back to HomePage)");
-//        boolean repeatFollow = true;
-//
-//        while (repeatFollow) {
-//
-//            Firstpage.printNewPeople(followings , username);
-//
-//            System.out.println("Enter username to follow (0: Back to HomePage )\n(e.g. 'Follow mahdi23') ");
-//            String command = scanner.nextLine();
-//            String[] splitted = command.split(" ");
-//
-//            if(splitted[0].equals("Follow")) {
-//                String username = splitted[1];
-////                for (PersonalUser allPersonalUser : PersonalUser.allPersonalUsers) {
-////                    if(username.equals(allPersonalUser.username)) {
-////                        followings.add(allPersonalUser);
-////                        System.out.println("Followed successfully!");
-////                    }
-////                }
-//                for (User allUser : User.allUsers) {
-//                    if(username.equals(allUser.username)){
-//                        followings.add(allUser.username);
-//                        allUser.followers.add(username);
-//                        System.out.println("Followed successfully!");
-//                    }
-//                }
-//
-//            }
-//            else {
-//                repeatFollow = false;
-//            }
-//
-//        }
-//
-//
-//    }
-
 
     @Override
     public String toString() {

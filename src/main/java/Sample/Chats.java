@@ -11,5 +11,13 @@ public class Chats {
     public int forwarded;
     public static ArrayList<Chats> allChats = new ArrayList<Chats>();
 
-
+    @Override
+    public String toString() {
+        return "Chats{" +
+                "ID=" + ID +
+                ", sender='" + sender + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", text=" + text +
+                '}';
+    }
 }

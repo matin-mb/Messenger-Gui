@@ -21,7 +21,10 @@ import java.util.stream.Collectors;
 
 public class HelloApplication extends Application {
     public static Connection connection ;
-    static Stage mainStage ;
+    public static Stage mainStage ;
+    public static User myUser;
+
+    public static Scene scene0011saved;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -167,6 +170,8 @@ public class HelloApplication extends Application {
                             borderPane_Per_firstPage.setRight(button0015);
                             Scene scene0011 = new Scene(borderPane_Per_firstPage, 700, 700);
                             mainStage.setScene(scene0011);
+
+
                             button0015.setOnAction(g -> {
                                 mainStage.setScene(scene011);
                             });
@@ -849,6 +854,8 @@ public class HelloApplication extends Application {
                             borderPane_Per_firstPage.setRight(button0015);
                             Scene scene0011 = new Scene(borderPane_Per_firstPage, 700, 700);
                             mainStage.setScene(scene0011);
+                            scene0011saved = scene0011;
+
                             button0015.setOnAction(g -> {
                                 mainStage.setScene(scene013);
                             });
@@ -1356,10 +1363,13 @@ public class HelloApplication extends Application {
 
                             });
 
+                            PersonalUser finalPersonalUser1 = personalUser;
+                            myUser = finalPersonalUser1;
                             button0012.setOnAction(u ->{
 
                                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("chatroom.fxml"));
                                 Parent root = null;
+
                                 try {
                                     root = fxmlLoader.load();
                                 } catch (IOException ex) {
@@ -1367,11 +1377,10 @@ public class HelloApplication extends Application {
                                 }
 
                                 Chatroom chatroom = fxmlLoader.getController();
+
                                 Scene scenenew = new Scene(root);
-
-
-                                stage.setScene(scenenew);
-                                stage.show();
+                                mainStage.setScene(scenenew);
+                                mainStage.show();
 
                             });
 
