@@ -1375,7 +1375,6 @@ public class HelloApplication extends Application {
                                 } catch (IOException ex) {
                                     ex.printStackTrace();
                                 }
-
                                 Chatroom chatroom = fxmlLoader.getController();
 
                                 Scene scenenew = new Scene(root);
@@ -1383,9 +1382,6 @@ public class HelloApplication extends Application {
                                 mainStage.show();
 
                             });
-
-
-
 
 
 

@@ -8,4 +8,5 @@ public class Secret_Chat {
     public int block;
     public static ArrayList<Secret_Chat> all_Secret_Chats = new ArrayList<Secret_Chat>();
     public ArrayList<Chats> thisPVChats = new ArrayList<Chats>();
+
 }

@@ -11,4 +11,5 @@ public class Group {
     public static ArrayList<Group> groups = new ArrayList<Group>();
     public ArrayList<Chats> groupChats = new ArrayList<Chats>();
 
+
 }
