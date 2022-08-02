@@ -23,6 +23,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+
 import static com.example.graphic_002.HelloApplication.*;
 
 public class Chatroom implements Initializable {
@@ -37,6 +38,7 @@ public class Chatroom implements Initializable {
     public Label createPvStats;
     public Label chatDetails;
     public Button createGroup;
+    public Button addNewMember;
     @FXML private ListView lvChatWindow;
     @FXML private TextField tfUser1, tfUser2;
 
