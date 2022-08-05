@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="349.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.graphic_002.Chatroom">
+<AnchorPane id="AnchorPane" prefHeight="349.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.graphic_002.Chatroom">
     <children>
-        <Button fx:id="bntUser1Send" layoutX="493.0" layoutY="315.0" onAction="#handleUser1SubmitMessage" text="send" />
+        <Button fx:id="bntUser1Send" layoutX="548.0" layoutY="315.0" onAction="#handleUser1SubmitMessage" text="send" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="62.0" prefHeight="17.0" prefWidth="62.0" />
 <!--        <Button fx:id="btnUser2Send" layoutX="351.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleUser2SubmitMessage" text="send message user2" />-->
-        <ListView fx:id="lvChatWindow" layoutX="220.0" layoutY="41.0" prefHeight="268.0" prefWidth="315.0" />
-        <TextField fx:id="tfUser1" layoutX="220.0" layoutY="315.0" prefHeight="25.0" prefWidth="269.0" promptText="send a message" />
+        <ListView fx:id="lvChatWindow" layoutX="228.0" layoutY="56.0" prefHeight="253.0" prefWidth="364.0" />
+        <TextField fx:id="tfUser1" layoutX="228.0" layoutY="315.0" prefHeight="25.0" prefWidth="315.0" promptText="send a message" />
       <ComboBox fx:id="chatsAvailable" layoutX="14.0" layoutY="43.0" prefHeight="25.0" prefWidth="139.0" promptText="chatrooms:" />
       <Button fx:id="chatSelected" layoutX="157.0" layoutY="43.0" mnemonicParsing="false" text="select" />
       <Button fx:id="backButton" layoutY="2.0" mnemonicParsing="false" text="Back" />
@@ -17,10 +18,13 @@
       <TextField fx:id="searchBar" layoutX="12.0" layoutY="116.0" prefHeight="25.0" prefWidth="114.0" promptText="new private chat:" />
       <Button fx:id="createPvChat" layoutX="131.0" layoutY="116.0" mnemonicParsing="false" text="create" />
       <Label fx:id="createPvStats" layoutX="14.0" layoutY="147.0" prefHeight="17.0" prefWidth="187.0" />
-      <Label fx:id="chatDetails" layoutX="221.0" layoutY="11.0" prefHeight="25.0" prefWidth="315.0" />
+      <Label fx:id="chatDetails" layoutX="228.0" layoutY="15.0" prefHeight="33.0" prefWidth="296.0" />
       <Button fx:id="createGroup" layoutX="14.0" layoutY="205.0" mnemonicParsing="false" text="Create new group" />
-      <Button fx:id="addNewMember" layoutX="15.0" layoutY="237.0" mnemonicParsing="false" text="Add new member" />
+      <Button fx:id="addNewMember" layoutX="15.0" layoutY="237.0" mnemonicParsing="false" text="Group setting" />
       <Label layoutX="12.0" layoutY="182.0" text="Groups:" />
+      <ImageView fx:id="profile" fitHeight="45.0" fitWidth="62.0" layoutX="531.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane fx:id="theme" layoutX="3.0" layoutY="305.0" prefHeight="39.0" prefWidth="76.0" />
+      <Label layoutX="7.0" layoutY="282.0" prefHeight="17.0" prefWidth="88.0" text="Light / Dark:" />
 <!--        <TextField fx:id="tfUser2" layoutX="293.0" layoutY="258.0" prefHeight="25.0" prefWidth="239.0" />-->
 
 

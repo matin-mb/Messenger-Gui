@@ -8,7 +8,7 @@
       <TextField fx:id="groupName" layoutX="171.0" layoutY="55.0" prefHeight="25.0" prefWidth="192.0" promptText="less than 15 charachters" />
       <Label layoutX="57.0" layoutY="59.0" prefHeight="17.0" prefWidth="123.0" text="Enter group's name :" />
       <ComboBox fx:id="followerBox" layoutX="57.0" layoutY="127.0" prefHeight="25.0" prefWidth="174.0" promptText="followers:" />
-      <Button fx:id="submit" layoutX="207.0" layoutY="214.0" mnemonicParsing="false" text="Submit" />
+      <Button fx:id="submit" layoutX="204.0" layoutY="200.0" mnemonicParsing="false" text="Submit" />
       <Button fx:id="addMember" layoutX="252.0" layoutY="127.0" mnemonicParsing="false" text="Add" />
    </children>
 </AnchorPane>
