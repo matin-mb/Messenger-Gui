@@ -1,12 +1,14 @@
 package com.example.graphic_002;
 
-import Sample.Chats;
-import Sample.Group;
-import Sample.Secret_Chat;
-import Sample.User;
+import Sample.*;
+import javafx.beans.Observable;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -20,8 +22,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 import static com.example.graphic_002.HelloApplication.*;
@@ -39,11 +46,16 @@ public class Chatroom implements Initializable {
     public Label chatDetails;
     public Button createGroup;
     public Button addNewMember;
+    public ImageView profile;
+
+    public AnchorPane theme;
     @FXML private ListView lvChatWindow;
     @FXML private TextField tfUser1, tfUser2;
 
     public static Secret_Chat mySecretChat;
     public static Group myGroup;
+    public static ComboBox chatsAvail;
+    public final static int width = 90;
 
     ObservableList<String> chatMessages = FXCollections.observableArrayList();//create observablelist for listview
 
@@ -55,9 +67,10 @@ public class Chatroom implements Initializable {
 
         if(myGroup ==null) {
             //chatMessages.add(myUser.username + " : " + tfUser1.getText());
-            String s = myUser.username + " : " + tfUser1.getText();
+//            String s = myUser.username + " : " + tfUser1.getText();
+            String s = tfUser1.getText() + " : " + myUser.username;
             StringBuilder text = new StringBuilder("");
-            for (int i = 0; i < 70 - s.length(); i++) {
+            for (int i = 0; i < width - s.length(); i++) {
                 text.append(" ");
             }
             text.append(s);
@@ -73,9 +86,10 @@ public class Chatroom implements Initializable {
         }
         else {
             //chatMessages.add(myUser.username + " : " + tfUser1.getText());
-            String s = myUser.username + " : " + tfUser1.getText();
+            //String s = myUser.username + " : " + tfUser1.getText();
+            String s = tfUser1.getText() + " : " + myUser.username;
             StringBuilder text = new StringBuilder("");
-            for (int i = 0; i < 70 - s.length(); i++) {
+            for (int i = 0; i < width - s.length(); i++) {
                 text.append(" ");
             }
             text.append(s);
@@ -93,10 +107,35 @@ public class Chatroom implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ToggleSwitch themeButton = new ToggleSwitch();
+        SimpleBooleanProperty isOn = themeButton.switchOnProperty();
+        isOn.addListener( (observable,oldValue,newValue)->{
+            if(newValue){
+                themeButton.getScene().getRoot().getStylesheets().add(getClass().getResource("styles.css").toString());
+            }
+            else {
+                themeButton.getScene().getRoot().getStylesheets().remove(getClass().getResource("styles.css").toString());
+            }
+        });
+        theme.getChildren().add(themeButton);
+
+
+
         // TODO
         lvChatWindow.setItems(chatMessages);//attach the observablelist to the listview
+        chatsAvail = chatsAvailable;
 
         User myuser = myUser;
+
+//        InputStream stream = null;
+//        try {
+//            String s = "C:\\Users\\MATIN\\Desktop\\Graphic_002\\src\\main\\resources\\com\\example\\graphic_002\\1.jpg";
+//            stream = new FileInputStream(s);
+//        } catch (FileNotFoundException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//        Image image = new Image(stream);
+//        profile.setImage(image);
 
         ArrayList<String> pvUsernames = new ArrayList<>();
 
@@ -141,7 +180,7 @@ public class Chatroom implements Initializable {
                                 String s = pvChat.text.toString() + " : " + pvChat.sender;
                                 StringBuilder txt = new StringBuilder("");
                                 //int width = (int) lvChatWindow.getWidth();
-                                for (int i = 0; i < 70 - s.length(); i++) {
+                                for (int i = 0; i < width - s.length(); i++) {
                                     txt.append(" ");
 
                                 }
@@ -161,11 +200,40 @@ public class Chatroom implements Initializable {
 
                     }
                 }
+                String contantUsername;
                 if(secret_chat.user1.equals(myUser.username)){
                     chatDetails.setText(secret_chat.user2);
+                    contantUsername = secret_chat.user2;
                 }
-                else
+                else {
                     chatDetails.setText(secret_chat.user1);
+                    contantUsername = secret_chat.user1;
+                }
+
+
+                User contact = null;
+                for (User allUser : User.allUsers) {
+                    if(allUser.username.equals(contantUsername)){
+                        contact = allUser;
+                    }
+                }
+
+
+                if(contact.profile_address != null) {
+                    //System.out.println("yes");
+                    InputStream stream = null;
+                    try {
+                        stream = new FileInputStream(contact.profile_address.toString());
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    Image image = new Image(stream);
+                    profile.setImage(image);
+                }
+                else {
+                    profile.setImage(null);
+                }
+
 
                 mySecretChat = secret_chat;
                 myGroup = null;
@@ -181,7 +249,7 @@ public class Chatroom implements Initializable {
                                 String s = groupChat.text.toString() + " : " + groupChat.sender;
                                 StringBuilder txt = new StringBuilder("");
                                 //int width = (int) lvChatWindow.getWidth();
-                                for (int i = 0; i < 70 - s.length(); i++) {
+                                for (int i = 0; i < width - s.length(); i++) {
                                     txt.append(" ");
 
                                 }
@@ -208,6 +276,21 @@ public class Chatroom implements Initializable {
                 }
                 s.deleteCharAt(s.length() - 2);
                 chatDetails.setText(s.toString());
+
+                if(group.profile_address != null) {
+                    //System.out.println("yes");
+                    InputStream stream = null;
+                    try {
+                        stream = new FileInputStream(group.profile_address);
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    Image image = new Image(stream);
+                    profile.setImage(image);
+                }
+                else {
+                    profile.setImage(null);
+                }
 
             }
 
@@ -329,6 +412,25 @@ public class Chatroom implements Initializable {
             newStage.show();
 
             //System.out.println(Group.groups);
+
+        });
+
+
+        addNewMember.setOnAction(v->{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("addMember.fxml"));
+            Parent root = null;
+            try {
+                root = fxmlLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Stage newStage = new Stage();
+            AddMember.thisStage = newStage;
+            Scene newScene = new Scene(root,500,300);
+            newStage.setScene(newScene);
+            newStage.show();
+
 
         });
 
