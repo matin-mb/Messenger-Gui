@@ -9,6 +9,8 @@ public class User {
     public ArrayList<String> followers = new ArrayList<>();
     public ArrayList<String> followings = new ArrayList<>();
     public String bio;
+    //public String profileImage;
+    public StringBuilder profile_address;
     Scanner scanner = new Scanner(System.in);
     public static ArrayList<User> allUsers = new ArrayList<>();
 

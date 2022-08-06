@@ -11,6 +11,7 @@ public class Post {
 
     public ArrayList<Reaction> reactions = new  ArrayList<Reaction>();
     public static ArrayList<Post> allPosts = new ArrayList<Post>();
+
     public LocalDateTime postTime;
 
     public Post(String text, String user) {
