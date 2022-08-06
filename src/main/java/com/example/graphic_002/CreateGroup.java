@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import static com.example.graphic_002.Chatroom.chatsAvail;
 import static com.example.graphic_002.HelloApplication.myUser;
 
 public class CreateGroup {
@@ -45,7 +46,10 @@ public class CreateGroup {
             newGroup.admin = myUser.username;
             newGroup.users.addAll(members);
             newGroup.users.add(myUser.username);
+            newGroup.id = String.valueOf(Group.groups.size() + 1);
             Group.groups.add(newGroup);
+            chatsAvail.getItems().add(newGroup.name);
+            thisStage.close();
 
             //thisStage.close();
 
